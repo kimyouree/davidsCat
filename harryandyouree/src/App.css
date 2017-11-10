@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+.auto-margin{
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+.relative{
+  position: relative; 
+}
+
+.absolute{
+  position: absolute; 
+}
+.title{
+  color: white;
+  font-weight: 400; 
+}
+
+.cathead--size{
+  max-width: 70px; 
+}
+
+/* .cat-object{
+
+} */
+

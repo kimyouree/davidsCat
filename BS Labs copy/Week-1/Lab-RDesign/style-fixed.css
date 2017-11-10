@@ -1,0 +1,96 @@
+
+.container {
+    width : 820px; 
+    padding : 10px; 
+    font-size: 36px;
+
+} 
+
+/* to apply a change to all the divs within a container, do css like below 'class' space div { }  */
+.container div{
+    /* what does borer-box: do? */
+    box-sizing : border-box;
+    border: 1px dotted navy; 
+}
+  
+.title {
+    display : block; 
+    text-align: left;
+    font-size : 36px;
+    color : navy;
+    background-color: palegoldenrod;
+    padding: 10px;
+    /* adding padding totals the total width to 840 instead of 820 */
+    border-style: dotted; 
+    border-width: 1px;
+    
+
+}
+
+.middlerow {
+    height: 300px;
+
+}
+
+.mid1 {
+    display: inline-block;
+    width: 170px; 
+    height: 60vh;
+    background-color: paleturquoise;
+    margin-right: -9px;
+
+/* margin-right: -9px to close the automatic gap of whitespace bewteen divs */
+}
+
+
+.mid2 { 
+    display: inline-block;
+    width: 480px; 
+    height: 60vh;
+    background-color: paleturquoise;
+    margin-right: -9px;
+
+}
+
+.mid3 { 
+     display: inline-block; 
+    width: 170px; 
+    height: 60vh;
+    background-color: paleturquoise;
+    margin-bottom: -9px;
+
+}
+
+.inline-block { 
+    display: inline-block;
+    vertical-align: top;
+    
+}
+
+.inline-block p { 
+    font-size: 12px;
+    padding: 10px;
+}
+
+.negative-margin { 
+    margin-right: ;
+}
+
+.foot1 { 
+    display: inline-block;
+    width: 410px; 
+    height: 20vh;
+    background-color: palegreen;
+    margin-right: -9px;
+
+}
+
+.foot2 { 
+    display: inline-block;
+    width: 410px; 
+    height: 20vh;
+    background-color: palegreen;
+    
+    /* why can't I push the box further right? */
+
+}

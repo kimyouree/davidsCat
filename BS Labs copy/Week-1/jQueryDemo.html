@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQuery Demo</title>
+
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            vertical-align: top; 
+            /* this is the thing you struggled with on borders! */
+        }
+        
+        .topright{
+            position: fixed;
+            top: 0px;
+            right: 0px;
+        }
+
+        .fucshia{
+            background-color:fuchsia
+        }
+        .aquamarine{
+            background-color:aquamarine
+        }
+        .chartreuse{
+            background-color:chartreuse
+        }
+        .deepskyblue{
+            background-color:deepskyblue
+        }                
+    </style>
+</head>
+<body>
+    <div class="box fucshia"></div>
+    <div class="box aquamarine"></div>
+    <div class="box chartreuse" id='chartDiv'></div>
+    <div class="box deepskyblue"></div>
+    <button id = "myButton">Fade out boxes</button>
+    <button id = "otherButton">Fade back in</button>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="crossorigin="anonymous"></script>
+<!-- <script> tags come after jquery link is embedded -->
+        <script>
+            // write your jQuery here
+            $(document).ready(function(){
+
+                //  $('#chartDiv').addClass('topright');
+                $('#chartDiv').append("<h1>I'm new here</h1>");
+                $('.fucshia').append("<h3>omg</h2>"); 
+                $('div').prepend("wot");
+
+                // function clickHandler () { 
+                //    console.log('clicked!');
+               // }
+
+                // $('#chartDiv').hover(clickHandler); does the same thing as below, you can google function EVENTS 
+                $('#chartDiv').hover(function(){
+                    console.log('clicked!'); 
+                }); 
+
+                // get myButton, when it is clicked, the fade effect will occur
+                 $('#myButton').click(function(){
+                    $('.box').fadeOut('slow');
+
+             });
+            //  try to make a button to fade it back in. 
+                $('#otherButton').click(function(){
+                    $('.box').fadeIn('fast');
+                })
+        });
+        
+           
+            
+        </script>
+</body>
+</html>
