@@ -15,6 +15,7 @@
 .absolute{
   position: absolute; 
 }
+
 .title{
   font-weight: 400; 
   left: 45%; 
@@ -27,8 +28,13 @@
    
 }
 
-.cathead--size{
-  max-width: 70px; 
+.timer-text{
+     font-weight: bold;
+     font-family: 'Megrim', cursive;
+     color: #707FD1;
+     font-size: 20px; 
 }
 
-
+.timer-width{
+     min-width: 100px;
+}

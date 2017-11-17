@@ -8,8 +8,8 @@ import CatObject from './CatObject';
 const velocity = 10;
 const initialCycleLength = 100;
 const acceleration = 0.96;
-const catW = 100;
-const catH = 50;
+const catW = 70;
+const catH = 70;
 const mouseW = 50;
 const mouseH = 50;
 
@@ -27,13 +27,16 @@ class App extends Component {
           y:0
         },
         catCycle: initialCycleLength,
+        startTime: 0,
+        currentTime: 0,
+        bestTime: 0,
     }
     this.getMousePos = this.getMousePos.bind(this);
     this.moveMouseObject = this.moveMouseObject.bind(this); 
     this.moveCatObject = this.moveCatObject.bind(this); 
     this.resetVel = this.resetVel.bind(this); 
-//     this.accelerate = this.accelerate.bind(this); 
     this.checkWallCollision = this.checkWallCollision.bind(this); 
+    this.endGame = this.endGame.bind(this);
  }
 
  // get the mouse/cursor coordinates
@@ -53,11 +56,21 @@ moveMouseObject(){
   mouseObject.style.top = this.state.mousePos.y + 'px'; 
 }
 
-// start moving mouse and cat 
+// start the timer, start moving mouse and cat 
 componentDidMount(){
   window.addEventListener("mousemove", this.getMousePos);
   setInterval(this.moveMouseObject, 30);
   this.moveCatObject();
+  this.setState({
+     startTime: Date.now(),
+  },
+  () => {
+     setInterval(()=>{
+          this.setState({
+               currentTime: (Date.now() - this.state.startTime)/1000,
+          })
+     }, 30)
+  })
 }
 catch(err) { console.log('uh-oh you has an error!');}
 
@@ -67,7 +80,8 @@ componentDidUpdate(prevProps, prevState){
     let catObject=document.getElementById('cat-object'); 
     catObject.style.left = this.state.catPos.x + 'px'; 
     catObject.style.top = this.state.catPos.y + 'px';
-    this.checkWallCollision();  
+    this.checkWallCollision();
+    this.endGame();
   }
 }
 
@@ -122,7 +136,7 @@ resetVel(){
   })
 }
 
-// end the game
+// end the game, record the time elapsed
 endGame(){
      const catX = this.state.catPos.x,
           catY = this.state.catPos.y,
@@ -136,8 +150,9 @@ endGame(){
                     y:0
                },
                catCycle: initialCycleLength,
+               startTime: Date.now(),
+               bestTime: Math.max(this.state.currentTime, this.state.bestTime),
           });
-          alert('Game Over!');
      }
 }
 
@@ -147,11 +162,11 @@ endGame(){
 
         <div>
         <h1 className="title">Super Kat</h1>
-        <MouseObject/>
-        <CatObject/>
+        <p className="timer-text">Current Time: <span className="timer-width">{this.state.currentTime}</span> s</p>
+        <p className="timer-text">Best Time: {this.state.bestTime} s</p>
+        <MouseObject mouseW={mouseW} mouseH={mouseH}/>
+        <CatObject catW={catW} catH={catH}/>
         </div>
-       
-        
 
       </div>
     );
