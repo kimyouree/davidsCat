@@ -7,7 +7,7 @@ import CatObject from './CatObject';
 // set inital velocity and acceleration
 const velocity = 10;
 const initialCycleLength = 100;
-const acceleration = 0.98;
+const acceleration = 0.96;
 const catW = 100;
 const catH = 50;
 const mouseW = 50;
@@ -71,7 +71,7 @@ componentDidUpdate(prevProps, prevState){
   }
 }
 
-// cat object follows mouse object 
+// cat object follows mouse object, accelerates over time
 moveCatObject(){
   let catPos = this.state.catPos;
   let mousePos = this.state.mousePos;
@@ -122,23 +122,24 @@ resetVel(){
   })
 }
 
-// // accelerate the cat
-// accelerate(){
-//   this.setState({
-//     catCycle: Math.max(this.state.catCycle * acceleration, 30),
-//   }, 
-//   ()=>{
-//     setTimeout(this.accelerate, this.state.catCycle);
-//   })
-// }
-
 // end the game
-// endGame(){
-//      const catX = this.state.catPos.x,
-//           catY = this.state.catPos.y,
-
-//      if((||) && (||))
-// }
+endGame(){
+     const catX = this.state.catPos.x,
+          catY = this.state.catPos.y,
+          mouseX = this.state.mousePos.x,
+          mouseY = this.state.mousePos.y;
+     if(((catX >= mouseX && catX <= mouseX + mouseW) || (catX + catW >= mouseX && catX + catW <= mouseX + mouseW)) 
+     && ((catY >= mouseY && catY <= mouseY + mouseH) || (catY + catH >= mouseY && catY + catH <= mouseY + mouseH))){
+          this.setState({
+               catPos: {
+                    x:0, 
+                    y:0
+               },
+               catCycle: initialCycleLength,
+          });
+          alert('Game Over!');
+     }
+}
 
   render() {
     return (
