@@ -7,6 +7,10 @@ import CatObject from './CatObject';
 // set inital velocity and acceleration
 const initialVel = 3;
 const acceleration = 1;
+const catW = 100;
+const catH = 50;
+const mouseW = 50;
+const mouseH = 50;
 
 class App extends Component {
   constructor(){
@@ -30,7 +34,8 @@ class App extends Component {
     this.accelerate = this.accelerate.bind(this); 
     this.checkWallCollision = this.checkWallCollision.bind(this); 
  }
- // this are the mouse/cursor coordinates
+
+ // get the mouse/cursor coordinates
 getMousePos(e){
     this.setState({
       mousePos: {
@@ -118,16 +123,20 @@ accelerate(){
   })
 }
 
+// end the game
+// endGame(){
+//      const catX = this.state.catPos.x,
+//           catY = this.state.catPos.y,
+
+//      if((||) && (||))
+// }
 
   render() {
     return (
       <div className="App">
         <h1 className="title">DAVIDsCAT</h1>
-        <MouseObject/>
-        <CatObject/>
-        
-       
-        
+        <MouseObject mouseW={mouseW} mouseH={mouseH}/>
+        <CatObject catW={catW} catH={catH}/>
       </div>
     );
   }
