@@ -144,9 +144,15 @@ endGame(){
   render() {
     return (
       <div className="App">
-        <h1 className="title">DAVIDsCAT</h1>
-        <MouseObject mouseW={mouseW} mouseH={mouseH}/>
-        <CatObject catW={catW} catH={catH}/>
+
+        <div>
+        <h1 className="title">Super Kat</h1>
+        <MouseObject/>
+        <CatObject/>
+        </div>
+       
+        
+
       </div>
     );
   }

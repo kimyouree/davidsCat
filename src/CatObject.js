@@ -6,7 +6,8 @@ class CatObject extends React.Component{
         return(
             
                 <div className="absolute" id="cat-object">
-                    <img width={this.props.catW + 'px'} height={this.props.catH + 'px'} src="/cathead.jpeg"/>
+
+                    <img className="cathead--size" src="http://ultimatecat.lol/images/cat-head-tux.png"/>
                 </div>
             
         )
