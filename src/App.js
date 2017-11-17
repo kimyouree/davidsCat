@@ -5,8 +5,9 @@ import MouseObject from './MouseObject';
 import CatObject from './CatObject'; 
 
 // set inital velocity and acceleration
-const initialVel = 3;
-const acceleration = 1;
+const velocity = 10;
+const initialCycleLength = 100;
+const acceleration = 0.98;
 const catW = 100;
 const catH = 50;
 const mouseW = 50;
@@ -25,13 +26,13 @@ class App extends Component {
           x:0, 
           y:0
         },
-        catVel: initialVel,
+        catCycle: initialCycleLength,
     }
     this.getMousePos = this.getMousePos.bind(this);
     this.moveMouseObject = this.moveMouseObject.bind(this); 
     this.moveCatObject = this.moveCatObject.bind(this); 
     this.resetVel = this.resetVel.bind(this); 
-    this.accelerate = this.accelerate.bind(this); 
+//     this.accelerate = this.accelerate.bind(this); 
     this.checkWallCollision = this.checkWallCollision.bind(this); 
  }
 
@@ -56,11 +57,11 @@ moveMouseObject(){
 componentDidMount(){
   window.addEventListener("mousemove", this.getMousePos);
   setInterval(this.moveMouseObject, 30);
-  setInterval(this.moveCatObject, 100);
-  setInterval(this.accelerate, 100);
+  this.moveCatObject();
 }
 catch(err) { console.log('uh-oh you has an error!');}
 
+// move the cat according to its position in state
 componentDidUpdate(prevProps, prevState){
   if(JSON.stringify(prevState.catPos)!==JSON.stringify(this.state.catPos)){
     let catObject=document.getElementById('cat-object'); 
@@ -76,24 +77,29 @@ moveCatObject(){
   let mousePos = this.state.mousePos;
   let dirX = 0;
   let dirY = 0;
-  if(catPos.x - mousePos.x > 3){
+  let margin = 3;
+  if(catPos.x - mousePos.x > margin){
     dirX = -1;
   }
-  else if(catPos.x - mousePos.x < -3){
+  else if(catPos.x - mousePos.x < -margin){
     dirX = 1;
   }
-  if(catPos.y - mousePos.y > 3){
+  if(catPos.y - mousePos.y > margin){
     dirY = -1;
   }
-  else if(catPos.y - mousePos.y < -3){
+  else if(catPos.y - mousePos.y < -margin){
     dirY = 1;
   }
   this.setState({
     catPos: {
-      x: catPos.x + this.state.catVel * dirX, 
-      y: catPos.y + this.state.catVel * dirY
-    }
-  })
+      x: catPos.x + velocity * dirX, 
+      y: catPos.y + velocity * dirY
+    },
+    catCycle: Math.max(this.state.catCycle * acceleration, 30),
+  },
+  ()=>{
+     setTimeout(this.moveCatObject, this.state.catCycle);
+  });
 }
 
 // check to see if cat hit a wall
@@ -112,16 +118,19 @@ checkWallCollision(){
 // resets cat velocity 
 resetVel(){
   this.setState({
-    catVel: initialVel
+     catCycle: initialCycleLength,
   })
 }
 
-// accelerate the cat
-accelerate(){
-  this.setState({
-    catVel: this.state.catVel + acceleration 
-  })
-}
+// // accelerate the cat
+// accelerate(){
+//   this.setState({
+//     catCycle: Math.max(this.state.catCycle * acceleration, 30),
+//   }, 
+//   ()=>{
+//     setTimeout(this.accelerate, this.state.catCycle);
+//   })
+// }
 
 // end the game
 // endGame(){
