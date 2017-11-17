@@ -5,7 +5,7 @@ import MouseObject from './MouseObject';
 import CatObject from './CatObject'; 
 
 // set inital velocity and acceleration
-const velocity = 10;
+const velocity = 12;
 const initialCycleLength = 100;
 const acceleration = 0.96;
 const catW = 70;
@@ -30,6 +30,7 @@ class App extends Component {
         startTime: 0,
         currentTime: 0,
         bestTime: 0,
+        casualMode: false,
     }
     this.getMousePos = this.getMousePos.bind(this);
     this.moveMouseObject = this.moveMouseObject.bind(this); 
@@ -37,6 +38,7 @@ class App extends Component {
     this.resetVel = this.resetVel.bind(this); 
     this.checkWallCollision = this.checkWallCollision.bind(this); 
     this.endGame = this.endGame.bind(this);
+    this.toggleCasualMode = this.toggleCasualMode.bind(this);
  }
 
  // get the mouse/cursor coordinates
@@ -91,7 +93,7 @@ moveCatObject(){
   let mousePos = this.state.mousePos;
   let dirX = 0;
   let dirY = 0;
-  let margin = 3;
+  let margin = 5;
   if(catPos.x - mousePos.x > margin){
     dirX = -1;
   }
@@ -123,8 +125,9 @@ checkWallCollision(){
   g = d.getElementsByTagName('body')[0],
   x = e.clientWidth || g.clientWidth,
   y = e.clientHeight|| g.clientHeight,
-  catPos = this.state.catPos
-  if(catPos.x<=10 || x - catPos.x <=10 || catPos.y <= 10 || y - catPos.y <= 10){
+  catPos = this.state.catPos,
+  wallMargin = 20
+  if(catPos.x <= wallMargin || x - catPos.x <= wallMargin || catPos.y <= wallMargin || y - catPos.y <= wallMargin){
     this.resetVel(); 
   }
 }
@@ -143,7 +146,8 @@ endGame(){
           mouseX = this.state.mousePos.x,
           mouseY = this.state.mousePos.y;
      if(((catX >= mouseX && catX <= mouseX + mouseW) || (catX + catW >= mouseX && catX + catW <= mouseX + mouseW)) 
-     && ((catY >= mouseY && catY <= mouseY + mouseH) || (catY + catH >= mouseY && catY + catH <= mouseY + mouseH))){
+     && ((catY >= mouseY && catY <= mouseY + mouseH) || (catY + catH >= mouseY && catY + catH <= mouseY + mouseH))
+     && !this.state.casualMode){
           this.setState({
                catPos: {
                     x:0, 
@@ -156,14 +160,39 @@ endGame(){
      }
 }
 
+// hide timer and disable game end in casual mode
+toggleCasualMode(){
+     if(this.state.casualMode){
+          this.setState({
+               casualMode: false,
+               bestTime: 0,
+               startTime: Date.now(),
+               catPos: {
+                    x:0, 
+                    y:0
+               },
+          })
+     }
+     else{
+          this.setState({
+               casualMode: true,
+               catPos: {
+                    x:0, 
+                    y:0
+               },
+          });
+     }
+}
+
   render() {
     return (
       <div className="App">
 
         <div>
         <h1 className="title">Super Kat</h1>
-        <p className="timer-text">Current Time: <span className="timer-width">{this.state.currentTime}</span> s</p>
-        <p className="timer-text">Best Time: {this.state.bestTime} s</p>
+        <p className="timer-text" hidden={this.state.casualMode}>Current Time: <span className="timer-width">{this.state.currentTime}</span> s</p>
+        <p className="timer-text" hidden={this.state.casualMode}>Best Time: {this.state.bestTime} s</p>
+        <button className="button-style" onClick={this.toggleCasualMode}>{this.state.casualMode ? 'Normal Mode' : 'Casual Mode'}</button>
         <MouseObject mouseW={mouseW} mouseH={mouseH}/>
         <CatObject catW={catW} catH={catH}/>
         </div>

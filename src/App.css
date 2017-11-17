@@ -38,3 +38,21 @@
 .timer-width{
      min-width: 100px;
 }
+
+.button-style{
+     border: 2px solid #707FD1;
+     color: #707FD1;
+     background-color: white;
+     font-size: 14px;
+     padding: 10px;
+     border-radius: 12px;
+     cursor: pointer;
+}
+
+.button-style:hover{
+     background-color: #DDDDDD;
+}
+
+.button-style:focus{
+     outline: none;
+}
