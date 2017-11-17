@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Crafty+Girls|Fredericka+the+Great|Kranky|Megrim');
 .App {
   text-align: center;
 }
@@ -15,15 +16,19 @@
   position: absolute; 
 }
 .title{
-  color: white;
   font-weight: 400; 
+  left: 45%; 
+  /* font-family: 'Fredericka the Great', cursive; */
+  font-family: 'Megrim', cursive;
+  /* font-family: 'Kranky', cursive; */
+  /* font-family: 'Crafty Girls', cursive; */
+  color: #707FD1;
+  font-size: 90px; 
+   
 }
 
 .cathead--size{
   max-width: 70px; 
 }
 
-/* .cat-object{
-
-} */
 

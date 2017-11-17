@@ -122,10 +122,11 @@ accelerate(){
   render() {
     return (
       <div className="App">
-        <h1 className="title">DAVIDsCAT</h1>
+        <div>
+        <h1 className="title">Super Kat</h1>
         <MouseObject/>
         <CatObject/>
-        
+        </div>
        
         
       </div>
