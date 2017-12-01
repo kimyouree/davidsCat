@@ -30,7 +30,7 @@ class App extends Component {
         startTime: 0,
         currentTime: 0,
         bestTime: 0,
-        casualMode: false,
+        casualMode: true,
     }
     this.getMousePos = this.getMousePos.bind(this);
     this.moveMouseObject = this.moveMouseObject.bind(this); 
@@ -189,10 +189,10 @@ toggleCasualMode(){
       <div className="App">
 
         <div>
-        <h1 className="title">Super Kat</h1>
+        <h1 className="title">{this.state.casualMode ? 'Cat Is At Peace' : 'RUN FROM THIS CAT'}</h1>
         <p className="timer-text" hidden={this.state.casualMode}>Current Time: <span className="timer-width">{this.state.currentTime}</span> s</p>
         <p className="timer-text" hidden={this.state.casualMode}>Best Time: {this.state.bestTime} s</p>
-        <button className="button-style" onClick={this.toggleCasualMode}>{this.state.casualMode ? 'Normal Mode' : 'Casual Mode'}</button>
+        <button className="button-style" onClick={this.toggleCasualMode}>{this.state.casualMode ? 'Angry Mode' : 'Casual Mode'}</button>
         <MouseObject mouseW={mouseW} mouseH={mouseH}/>
         <CatObject catW={catW} catH={catH}/>
         </div>
