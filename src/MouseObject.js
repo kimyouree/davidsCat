@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import './MouseObject.css';
 
 class MouseObject extends React.Component{
